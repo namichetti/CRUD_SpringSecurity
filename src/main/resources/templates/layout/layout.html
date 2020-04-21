@@ -21,16 +21,27 @@
       <li class="nav-item">
         <a class="nav-link" th:href="@{/}">Alta</a>
       </li>
-      <li sec:authorize="isAuthenticated()">
-      	 <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
-      	    <button id="btnGroupDrop1" type="button"
-		            class="btn btn-secondary dropdown-toggle"
-		            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-		      <span sec:authentication="name"></span>
-		    </button>
-      		<a class="dropdown-item" th:href="@{/login}">Salir</a>
-    	</div>
+      <li>
+		<div class="dropdown"  sec:authorize="isAuthenticated()">
+		  <button class="btn btn-primary dropdown-toggle" type="button" id="dropdownMenuButton" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		    <span sec:authentication="name"></span>
+		  </button>
+		  <div class="dropdown-menu" aria-labelledby="dropdownMenuButton">
+		  	<form method="POST" th:action="@{/logout}">
+		  	    <button class="dropdown-item" type="submit">Salir</button>
+		  	</form>
+		  </div>
+		</div>
       </li>
+      <li sec:authorize="isAuthenticated()">
+      <div class="dropdown-menu" aria-labelledby="dropdownMenuLink">
+      <span sec:authentication="name"></span>
+    	<form th:action="@{/logout}" method="POST">
+    		<a class="btn btn-outline-primary" type="submit">Salir</a>
+    	</form>
+      </div>
+      </li>
+      
       <li sec:authorize="!isAuthenticated()"> 
     	 <div class="btn-group" role="group">
 	      	<a class="btn btn-outline-primary" th:href="@{/login}">Ingresar</a>
@@ -43,6 +54,13 @@
 <div th:fragment="alerts">
 	<div th:if="${danger!=null}" th:text="${danger}" class="alert alert-danger"></div>
 	<div th:if="${info!=null}" th:text="${info}" class="alert alert-info"></div>
+</div>
+
+<div th:fragment="roles">
+	<div class="container">
+		Usuario logueado: <span sec:authentication="name"></span>
+		Roles: <span sec:authentication="principal.authorities"></span>	
+	</div>
 </div>
 
 <div th:fragment="scripts">
