@@ -12,7 +12,9 @@ import org.springframework.web.servlet.mvc.support.RedirectAttributes;
 public class LoginController {
 
 	@GetMapping("/login")
-	public String login(@RequestParam(name="error",required=false)String error, Principal principal, Model model,RedirectAttributes flash) {
+	public String login(@RequestParam(name="error",required=false)String error, 
+						@RequestParam(name="logout",required=false)String logout,
+			Principal principal, Model model,RedirectAttributes flash) {
 		
 		if(principal!=null) {
 			flash.addFlashAttribute("info","Ya ha iniciado sesión");
@@ -22,6 +24,11 @@ public class LoginController {
 		if(error!=null) {
 			model.addAttribute("danger", "Usuario o contraseña incorrecto/s");
 		}
+		
+		if(logout!=null){
+			model.addAttribute("info", "Ah salido exitosamente.");
+		}
+		
 		
 		return "login";
 	}
