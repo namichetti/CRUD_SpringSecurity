@@ -1,5 +1,6 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org">
+<html xmlns:th="https://www.thymeleaf.org"
+	  xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
 <head th:fragment="head">
 <meta charset="UTF-8">
 <title th:text="${titulo}"></title>
@@ -13,20 +14,35 @@
     <span class="navbar-toggler-icon"></span>
   </button>
   <div class="collapse navbar-collapse" id="navbarSupportedContent">
-    <ul class="navbar-nav mr-auto">
-      <li class="nav-item active">
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item">
         <a class="nav-link" th:href="@{/}">Lista</a>
       </li>
       <li class="nav-item">
         <a class="nav-link" th:href="@{/}">Alta</a>
+      </li>
+      <li sec:authorize="isAuthenticated()">
+      	 <div class="dropdown-menu" aria-labelledby="btnGroupDrop1">
+      	    <button id="btnGroupDrop1" type="button"
+		            class="btn btn-secondary dropdown-toggle"
+		            data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+		      <span sec:authentication="name"></span>
+		    </button>
+      		<a class="dropdown-item" th:href="@{/login}">Salir</a>
+    	</div>
+      </li>
+      <li sec:authorize="!isAuthenticated()"> 
+    	 <div class="btn-group" role="group">
+	      	<a class="btn btn-outline-primary" th:href="@{/login}">Ingresar</a>
+    	</div>
       </li>
     </ul>
   </div>
 </nav>
 
 <div th:fragment="alerts">
-	<div th:if="${danger!=null}" th:text="${danger}"></div>
-	<div th:if="${info!=null}" th:text="${info}"></div>
+	<div th:if="${danger!=null}" th:text="${danger}" class="alert alert-danger"></div>
+	<div th:if="${info!=null}" th:text="${info}" class="alert alert-info"></div>
 </div>
 
 <div th:fragment="scripts">

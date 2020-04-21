@@ -20,7 +20,7 @@ public class LoginController {
 		}
 		
 		if(error!=null) {
-			flash.addFlashAttribute("danger", "Usuario o contraseña incorrecto/s");
+			model.addAttribute("danger", "Usuario o contraseña incorrecto/s");
 		}
 		
 		return "login";
