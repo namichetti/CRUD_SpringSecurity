@@ -4,7 +4,8 @@
 <body>
 <div th:replace="layout/layout :: navbar"></div>
 <div th:replace="layout/layout :: alerts"></div>
-<form th:object="@{/login}" method="POST">
+
+<form th:action="@{/login}" method="POST">
   <div class="form-group">
     <label for="formGroupExampleInput">Username</label>
     <input type="text" class="form-control" name="username" id="formGroupExampleInput" placeholder="Username">
@@ -15,6 +16,7 @@
   </div>
   <a th:href="@{/}" class="btn btn-primary">Ingresar</a>
 </form>
+
 <div th:replace="layout/layout :: scripts"></div>
 </body>
 </html>
