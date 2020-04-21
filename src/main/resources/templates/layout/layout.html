@@ -54,6 +54,7 @@
 <div th:fragment="alerts">
 	<div th:if="${danger!=null}" th:text="${danger}" class="alert alert-danger"></div>
 	<div th:if="${info!=null}" th:text="${info}" class="alert alert-info"></div>
+	<div th:if="${success!=null}" th:text="${success}" class="alert alert-success"></div>
 </div>
 
 <div th:fragment="roles">

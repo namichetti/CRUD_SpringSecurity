@@ -5,7 +5,31 @@
 <div th:replace="layout/layout :: navbar"></div>
 <div th:replace="layout/layout :: alerts"></div>
 
-<div th:replace="layout/layout :: scripts"></div>
+<div class="container">
+	<table class="table table-striped">
+	  <thead>
+	    <tr>
+	      <th>Id</th>
+	      <th>Username</th>
+	      <th>Email</th>
+	      <th>Fecha alta</th>
+	      <th>Editar</th>
+	      <th>Eliminar</th>
+	    </tr>
+	  </thead>
+	  <tbody>
+	    <tr th:each="cliente:${clientes}">
+	      <td th:text="${cliente.id}"></td>
+	      <td th:text="${cliente.username}"></td>
+	      <td th:text="${cliente.email}"></td>
+	      <td th:text="${cliente.fechaAlta}"></td>
+	      <td><a th:href="@{/editar/}+${cliente.id}" class="btn btn-primary">Editar</a></td>
+	      <td><a th:href="@{/delete/}+${cliente.id}" class="btn btn-danger">Eliminar</a></td>
+	    </tr>
+	  </tbody>
+	</table>
+</div>
+<div th:replace="layout/layout :: scripts"></div><br><br>
 <div th:replace="layout/layout :: roles"></div>
 </body>
 </html>
