@@ -1,10 +1,10 @@
 <!DOCTYPE html>
-<html xmlns:th="https://www.thymeleaf.org">
+<html xmlns:th="https://www.thymeleaf.org" xmlns:sec="https://www.thymeleaf.org/extras/spring-security">
 <head th:replace="layout/layout :: head">
 <body>
 <div th:replace="layout/layout :: navbar"></div>
 <div th:replace="layout/layout :: alerts"></div>
-
+<h1 class="text text-primary text-center pt-3" th:text="${titulo}"></h1>
 <div class="container">
 	<table class="table table-striped">
 	  <thead>
@@ -13,18 +13,18 @@
 	      <th>Username</th>
 	      <th>Email</th>
 	      <th>Fecha alta</th>
-	      <th>Editar</th>
-	      <th>Eliminar</th>
+	      <th sec:authorize="hasRole('ROLE_ADMIN')">Editar</th>
+	      <th sec:authorize="hasRole('ROLE_ADMIN')">Eliminar</th>
 	    </tr>
 	  </thead>
 	  <tbody>
 	    <tr th:each="cliente:${clientes}">
-	      <td th:text="${cliente.id}"></td>
+	      <td th:text="${cliente.id}"><a th:href="@{/ver} + {cliente.id}"></a></td>
 	      <td th:text="${cliente.username}"></td>
 	      <td th:text="${cliente.email}"></td>
 	      <td th:text="${cliente.fechaAlta}"></td>
-	      <td><a th:href="@{/editar/}+${cliente.id}" class="btn btn-primary">Editar</a></td>
-	      <td><a th:href="@{/delete/}+${cliente.id}" class="btn btn-danger">Eliminar</a></td>
+	      <td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/editar/}+${cliente.id}" class="btn btn-primary">Editar</a></td>
+	      <td sec:authorize="hasRole('ROLE_ADMIN')"><a th:href="@{/delete/}+${cliente.id}" class="btn btn-danger">Eliminar</a></td>
 	    </tr>
 	  </tbody>
 	</table>

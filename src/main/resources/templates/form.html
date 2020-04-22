@@ -8,20 +8,20 @@
 <h1 class="text text-primary text-center pt-3" th:text="${titulo}"></h1>
 <div class="container">
 	<div class="col-md-4 offset-md-4">
-		<form th:action="@{/form}" method="POST" th:object="${cliente}">
+		<form th:action="@{/guardar}" method="POST" th:object="${cliente}">
 		  <div class="form-group">
 		    <label for="username">Usuario</label>
-		    <input type="text" class="form-control" th:field="*{username}" name="username" id="formGroupExampleInput" placeholder="Username" autofocus>
+		    <input type="text" class="form-control" th:field="*{username}" name="username" placeholder="Username" autofocus/>
 		 	<small class="text text-danger" th:if="${#fields.hasErrors('username')}" th:errors="*{username}"></small>	
 		  </div>
 		  <div class="form-group">
 		    <label for="email">Email</label>
-		    <input type="text" class="form-control" th:field="*{email}" name="email" id="email" placeholder="Email">
+		    <input type="text" class="form-control" th:field="*{email}" name="email"  placeholder="Email"/>
 		    <small class="text text-danger" th:if="${#fields.hasErrors('email')}"  th:errors="*{email}"></small>
 		  </div>
 		   <div class="form-group">
 		    <label for="fecha_alta">Fecha Alta</label>
-		    <input type="text" class="form-control" th:field="*{fechaAlta}" name="fechaAlta" id="fecha_alta" placeholder="Fecha alta">
+		    <input type="date" class="form-control" th:field="*{fechaAlta}" name="fechaAlta"  placeholder="Fecha alta"/>
 		    <small class="text text-danger" th:if="${#fields.hasErrors('fechaAlta')}"  th:errors="*{fechaAlta}"></small>
 		  </div>
 		  <input type="submit" class="btn btn-primary" value="Ingresar"/>

@@ -18,8 +18,8 @@
       <li class="nav-item">
         <a class="nav-link" th:href="@{/}">Lista</a>
       </li>
-      <li class="nav-item">
-        <a class="nav-link" th:href="@{/form}">Alta</a>
+      <li sec:authorize="hasRole('ROLE_ADMIN')" class="nav-item">
+        <a class="nav-link" th:href="@{/alta}">Alta</a>
       </li>
       <li>
 		<div class="dropdown"  sec:authorize="isAuthenticated()">
