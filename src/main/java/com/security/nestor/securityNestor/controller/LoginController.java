@@ -2,6 +2,7 @@ package com.security.nestor.securityNestor.controller;
 
 import java.security.Principal;
 
+
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
@@ -14,7 +15,7 @@ public class LoginController {
 	@GetMapping("/login")
 	public String login(@RequestParam(name="error",required=false)String error, 
 						@RequestParam(name="logout",required=false)String logout,
-			Principal principal, Model model,RedirectAttributes flash) {
+						Principal principal, Model model,RedirectAttributes flash) {
 		
 		if(principal!=null) {
 			flash.addFlashAttribute("info","Ya ha iniciado sesión");

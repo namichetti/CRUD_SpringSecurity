@@ -27,7 +27,7 @@ public class ClienteController {
 	@Autowired
 	private IClienteService clienteService;
 	
-	@GetMapping("/")
+	@GetMapping({"/"})
 	public String listar(Model model) {
 		List<Cliente> clientes = clienteService.listar();
 		model.addAttribute("titulo","Listado clientes");
@@ -64,12 +64,14 @@ public class ClienteController {
 	@GetMapping("/editar/{id}")
 	public String editar(@PathVariable(value="id")Long id, Model model,RedirectAttributes flash) {
 		
+		Cliente cliente = null;
+		
 		if(id==null || id<=0) {
 			flash.addFlashAttribute("danger","Cliente inválido");
 			return "redirect:/";
 		}
 		
-		Cliente cliente = clienteService.encontrarPorId(id);
+		cliente = clienteService.encontrarPorId(id);
 		
 		if(cliente == null) {
 			flash.addFlashAttribute("danger","Cliente no existe");
@@ -95,8 +97,27 @@ public class ClienteController {
 		return "redirect:/";
 	}
 	
+	@Secured({"ROLE_USER, ROLE_ADMIN"})
 	@GetMapping("/ver/{id}")
-	public String ver() {
+	public String ver(@PathVariable(value="id")Long id,Model model, RedirectAttributes flash) {
+		
+		Cliente cliente = null;
+		
+		if(id==null || id<=0) {
+			flash.addFlashAttribute("danger","Cliente inválido");
+			return "redirect:/";
+		}
+		
+		cliente = clienteService.encontrarPorId(id);
+		
+		if(cliente.getId()==null) {
+			flash.addFlashAttribute("danger","Cliente no existe");
+			return "redirect:/";
+		}
+		
+		model.addAttribute("titulo", "Descripción del cliente");
+		model.addAttribute("cliente",cliente);	
+		
 		return "ver";
 	}
 }
