@@ -82,7 +82,7 @@ public class ClienteController {
 		model.addAttribute("titulo","Editar cliente");
 		return "form";
 	}
-	
+
 	@Secured("ROLE_ADMIN")
 	@GetMapping("/delete/{id}")
 	public String baja(@PathVariable(value="id") Long id, RedirectAttributes flash) {
