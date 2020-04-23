@@ -36,7 +36,7 @@ public class ClienteRestController {
 		clienteService.baja(id);
 	}
 	
-	@PutMapping("/alta")
+	@PutMapping("/actualizar")
 	@ResponseBody
 	public void actualizar(Cliente cliente) {
 		
