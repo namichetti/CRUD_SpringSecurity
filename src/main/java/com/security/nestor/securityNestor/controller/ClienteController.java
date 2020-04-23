@@ -27,7 +27,7 @@ public class ClienteController {
 	@Autowired
 	private IClienteService clienteService;
 	
-	@GetMapping({"/"})
+	@GetMapping({"/","/*"})
 	public String listar(Model model) {
 		List<Cliente> clientes = clienteService.listar();
 		model.addAttribute("titulo","Listado clientes");
