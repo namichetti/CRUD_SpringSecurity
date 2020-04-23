@@ -97,7 +97,7 @@ public class ClienteController {
 		return "redirect:/";
 	}
 	
-	@Secured({"ROLE_USER, ROLE_ADMIN"})
+	
 	@GetMapping("/ver/{id}")
 	public String ver(@PathVariable(value="id")Long id,Model model, RedirectAttributes flash) {
 		
