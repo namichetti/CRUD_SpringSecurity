@@ -1,4 +1,4 @@
-# Simple CRUD con Seguridad
+# Simple Java CRUD con Seguridad
 
 ## Tecnologías usadas
 
