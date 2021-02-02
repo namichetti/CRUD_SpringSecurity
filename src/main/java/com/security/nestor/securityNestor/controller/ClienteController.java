@@ -53,6 +53,14 @@ public class ClienteController {
 			return "form";
 		}
 		
+		Cliente clienteBusqueda = clienteService.encontrarCliente(cliente.getUsername());
+		
+		if(clienteBusqueda != null) {
+			flash.addFlashAttribute("danger","Usuario ya existe.");
+			return "redirect:/";
+		}
+
+		
 		String mensaje = (cliente.getId() == null)?"Cliente agregado con éxito": "Cliente editado con éxito";
 		flash.addFlashAttribute("success",mensaje);
 		clienteService.alta(cliente);
@@ -62,7 +70,7 @@ public class ClienteController {
 	
 	@Secured("ROLE_ADMIN")
 	@GetMapping("/editar/{id}")
-	public String editar(@PathVariable(value="id")Long id, Model model,RedirectAttributes flash) {
+	public String editar(@PathVariable(value="id")Long id, Model model,RedirectAttributes flash,SessionStatus status) {
 		
 		Cliente cliente = null;
 		
@@ -80,12 +88,20 @@ public class ClienteController {
 		
 		model.addAttribute("cliente", cliente);
 		model.addAttribute("titulo","Editar cliente");
+		status.setComplete();
 		return "form";
 	}
 
 	@Secured("ROLE_ADMIN")
 	@GetMapping("/delete/{id}")
 	public String baja(@PathVariable(value="id") Long id, RedirectAttributes flash) {
+		
+		Cliente cliente = clienteService.encontrarPorId(id);
+		
+		if(cliente==null) {
+			flash.addFlashAttribute("danger","Cliente inválido");
+			return "redirect:/";
+		}
 		
 		if(id==null || id<=0) {
 			flash.addFlashAttribute("danger","Cliente inválido");
@@ -110,7 +126,7 @@ public class ClienteController {
 		
 		cliente = clienteService.encontrarPorId(id);
 		
-		if(cliente.getId()==null) {
+		if(cliente == null) {
 			flash.addFlashAttribute("danger","Cliente no existe");
 			return "redirect:/";
 		}

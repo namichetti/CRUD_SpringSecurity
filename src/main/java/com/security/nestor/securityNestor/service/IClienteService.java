@@ -11,5 +11,5 @@ public interface IClienteService {
 	public void alta(Cliente cliente);
 	public void baja(Long id);
 	public Cliente encontrarPorId(Long id);
-	
+	public Cliente encontrarCliente(String usuario);
 }

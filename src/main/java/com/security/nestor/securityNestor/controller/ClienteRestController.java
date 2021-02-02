@@ -16,6 +16,8 @@ import com.security.nestor.securityNestor.service.IClienteService;
 @RestController
 @RequestMapping("/rest")
 public class ClienteRestController {
+	
+	//Testeado con Postman. 
 
 	@Autowired
 	private IClienteService clienteService;
